@@ -1,6 +1,5 @@
 package com.reto3.masterclass3.service;
 
-import com.reto3.masterclass3.entities.Category;
 import com.reto3.masterclass3.entities.Machine;
 import com.reto3.masterclass3.repository.MachineRepository;
 import org.springframework.beans.factory.annotation.Autowired;

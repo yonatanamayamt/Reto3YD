@@ -1,8 +1,7 @@
 package com.reto3.masterclass3.repository;
 
-import com.reto3.masterclass3.entities.Reservation;
+
 import com.reto3.masterclass3.entities.Score;
-import com.reto3.masterclass3.repository.crudRepository.ReservationCrudRepository;
 import com.reto3.masterclass3.repository.crudRepository.ScoreCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

@@ -9,11 +9,10 @@ import java.util.Date;
 @Entity
 @Table(name ="score")
 public class Score implements Serializable {
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private Integer idScore;
-    private String messageText;
-    private Integer stars;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer IdScore;
+    private Integer score;
 
     @OneToOne
     @JsonIgnoreProperties("score")
@@ -21,27 +20,19 @@ public class Score implements Serializable {
 
 
     public Integer getIdScore() {
-        return idScore;
+        return IdScore;
     }
 
     public void setIdScore(Integer idScore) {
-        this.idScore = idScore;
+        IdScore = idScore;
     }
 
-    public String getMessageText() {
-        return messageText;
+    public Integer getScore() {
+        return score;
     }
 
-    public void setMessageText(String messageText) {
-        this.messageText = messageText;
-    }
-
-    public Integer getStars() {
-        return stars;
-    }
-
-    public void setStars(Integer stars) {
-        this.stars = stars;
+    public void setScore(Integer score) {
+        this.score = score;
     }
 
     public Reservation getReservation() {

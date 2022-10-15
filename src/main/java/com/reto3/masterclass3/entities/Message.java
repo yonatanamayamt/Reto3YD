@@ -9,10 +9,10 @@ import java.util.Date;
 @Entity
 @Table(name ="message")
 public class Message implements Serializable {
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idMessage;
-   private String messageText;
+    private String messageText;
 
     @ManyToOne
     @JoinColumn(name="machineId")

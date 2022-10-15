@@ -1,6 +1,5 @@
 package com.reto3.masterclass3.repository;
 
-import com.reto3.masterclass3.entities.Client;
 import com.reto3.masterclass3.entities.Reservation;
 import com.reto3.masterclass3.repository.crudRepository.ReservationCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;

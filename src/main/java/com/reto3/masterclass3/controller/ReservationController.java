@@ -1,5 +1,6 @@
 package com.reto3.masterclass3.controller;
 
+import com.reto3.masterclass3.entities.Category;
 import com.reto3.masterclass3.entities.Client;
 import com.reto3.masterclass3.entities.Reservation;
 import com.reto3.masterclass3.service.ReservationService;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/Reservation")
@@ -17,6 +19,11 @@ public class ReservationController {
     @GetMapping("/all")
     public List<Reservation> getAll(){
         return reservationService.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Reservation> getById(@PathVariable("id") int id) {
+        return reservationService.getReservation(id);
     }
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)

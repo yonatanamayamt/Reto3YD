@@ -35,19 +35,15 @@ public class ScoreService {
         }
 
     }
-    public Score update(Score p) {
+    public Score update(Score p){
         if (p.getIdScore()!=null){
-            Optional<Score> q= scoreRepository.getScore(p.getIdScore());
-            if(q.isPresent()){
-                if(p.getMessageText()!=null){
-                    q.get().setMessageText(p.getMessageText());
+            Optional<Score> e = scoreRepository.getScore(p.getIdScore());
+            if(e.isPresent()){
+                if (p.getScore()!= null){
+                    e.get().setScore(p.getScore());
                 }
-                if(p.getStars()!=null){
-                    q.get().setStars(p.getStars());
-                }
-
-                scoreRepository.save(q.get());
-                return q.get();
+                scoreRepository.save(e.get());
+                return e.get();
             }else{
                 return p;
             }
@@ -55,6 +51,7 @@ public class ScoreService {
             return p;
         }
     }
+
 
     public boolean delete(int id){
         boolean flag=false;

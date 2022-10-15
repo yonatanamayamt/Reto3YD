@@ -1,7 +1,6 @@
 package com.reto3.masterclass3.repository;
 
 import com.reto3.masterclass3.entities.Message;
-import com.reto3.masterclass3.entities.Reservation;
 import com.reto3.masterclass3.repository.crudRepository.MessageCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

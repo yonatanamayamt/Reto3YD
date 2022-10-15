@@ -1,5 +1,4 @@
 package com.reto3.masterclass3.repository;
-
 import com.reto3.masterclass3.entities.Category;
 import com.reto3.masterclass3.repository.crudRepository.CategoryCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +18,11 @@ public class CategoryRepository {
     public Optional<Category> getCategory(int id){
         return categoryCrudRepository.findById(id);
     }
-    public Category save(Category c){
+    public Category save(Category p){
 
-        return categoryCrudRepository.save(c);
+        return categoryCrudRepository.save(p);
     }
-    public void delete(Category c){
-        categoryCrudRepository.delete(c);
+    public void delete(Category p){
+        categoryCrudRepository.delete(p);
     }
 }

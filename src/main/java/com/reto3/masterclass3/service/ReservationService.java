@@ -1,6 +1,5 @@
 package com.reto3.masterclass3.service;
 
-import com.reto3.masterclass3.entities.Client;
 import com.reto3.masterclass3.entities.Reservation;
 import com.reto3.masterclass3.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,9 +48,7 @@ public class ReservationService {
                 if(p.getStatus()!=null){
                     q.get().setStatus(p.getStatus());
                 }
-                //if(p.getMachine()!=null){
-                   // q.get().setStatus(p.getMachine());
-               // }
+
 
                 reservationRepository.save(q.get());
                 return q.get();

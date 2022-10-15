@@ -44,7 +44,6 @@ public class Category implements Serializable {
         this.description = description;
     }
 
-
     public List<Machine> getMachines() {
         return machines;
     }

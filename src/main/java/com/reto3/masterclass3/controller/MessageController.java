@@ -1,5 +1,6 @@
 package com.reto3.masterclass3.controller;
 
+import com.reto3.masterclass3.entities.Category;
 import com.reto3.masterclass3.entities.Message;
 import com.reto3.masterclass3.entities.Reservation;
 import com.reto3.masterclass3.service.MessageService;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/Message")
@@ -17,6 +19,11 @@ public class MessageController {
     @GetMapping("/all")
     public List<Message> getAll(){
         return messageService.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Message> getById(@PathVariable("id") int id) {
+        return messageService.getMessage(id);
     }
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
