@@ -17,8 +17,8 @@ public class MachineController {
     public List<Machine> getAll(){
         return machineService.getAll();
     }
-@PostMapping("/save")
-@ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/save")
+    @ResponseStatus(HttpStatus.CREATED)
     public Machine save(@RequestBody Machine p){
         return machineService.save(p);
 }
