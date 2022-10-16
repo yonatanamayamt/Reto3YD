@@ -21,11 +21,21 @@ public class MachineController {
     }
     @GetMapping("/{id}")
     public Optional<Machine> getById(@PathVariable("id") int id) {
-        return machineService.getMachine(id);
+        return machineService.getById(id);
     }
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Machine save(@RequestBody Machine p){
         return machineService.save(p);
-}
+    }
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Machine update(@RequestBody Machine c){
+        return machineService.update(c);
+    }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean delete(@PathVariable("id") int id){
+        return machineService.delete(id);
+    }
 }

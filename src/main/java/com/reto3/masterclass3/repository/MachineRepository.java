@@ -11,20 +11,18 @@ import java.util.Optional;
 @Repository
 public class MachineRepository {
     @Autowired
-    private MachineCrudRepository machineCrudRepository;
+    private MachineCrudRepository clientCrudRepository;
 
     public List<Machine> getAll(){
-    return (List<Machine>) machineCrudRepository.findAll();
-
+        return (List<Machine>) clientCrudRepository.findAll();
     }
-    public Optional<Machine> getMachine(int id){
-        return machineCrudRepository.findById(id);
+    public Optional<Machine> getById(int id){
+        return clientCrudRepository.findById(id);
     }
     public Machine save(Machine c){
-
-        return machineCrudRepository.save(c);
+        return clientCrudRepository.save(c);
     }
     public void delete(Machine c){
-        machineCrudRepository.delete(c);
+        clientCrudRepository.delete(c);
     }
 }

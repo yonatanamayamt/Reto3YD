@@ -18,48 +18,38 @@ public class ScoreService {
         return scoreRepository.getAll();
     }
 
-    public Optional<Score> getScore(int id) {
-        return scoreRepository.getScore(id);
+    public Optional<Score>getById(int id){
+        return scoreRepository.getById(id);
     }
-
-    public Score save(Score p) {
-        if (p.getIdScore() == null) {
-            return scoreRepository.save(p);
-        } else {
-            Optional<Score> e = scoreRepository.getScore(p.getIdScore());
-            if(e.isPresent()){
-                return p;
-            }else{
-                return scoreRepository.save(p);
-            }
+    public Score save(Score c){
+        if(c.getIdScore()==null){
+            return scoreRepository.save(c);
         }
-
+        return c;
     }
-    public Score update(Score p){
-        if (p.getIdScore()!=null){
-            Optional<Score> e = scoreRepository.getScore(p.getIdScore());
-            if(e.isPresent()){
-                if (p.getScore()!= null){
-                    e.get().setScore(p.getScore());
-                }
-                scoreRepository.save(e.get());
-                return e.get();
-            }else{
-                return p;
-            }
-        }else{
-            return p;
-        }
-    }
-
-
     public boolean delete(int id){
-        boolean flag=false;
-        Optional<Score>p= scoreRepository.getScore(id);
-        if(p.isPresent()){
-            scoreRepository.delete(p.get());
-            flag=true;
+        Optional<Score> cOp= scoreRepository.getById(id);
+        if(cOp.isPresent()){
+            scoreRepository.delete(cOp.get());
+            return true;
         }
-        return flag;
+        return false;
+    }
+    public Score update(Score c){
+        if(c.getIdScore()!=null){
+            Optional<Score> old= scoreRepository.getById(c.getIdScore());
+            if(old.isPresent()){
+                Score k=old.get();
+                if(c.getIdScore()!=null){
+                    k.setIdScore(c.getIdScore());
+                }
+                if(c.getScore()!=null){
+                    k.setScore(c.getScore());
+                }
+
+                return scoreRepository.save(k);
+            }
+        }
+        return c;
     }
 }

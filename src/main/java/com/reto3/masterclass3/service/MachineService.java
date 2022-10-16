@@ -1,5 +1,6 @@
 package com.reto3.masterclass3.service;
 
+import com.reto3.masterclass3.entities.Category;
 import com.reto3.masterclass3.entities.Machine;
 import com.reto3.masterclass3.repository.MachineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,60 +19,53 @@ public class MachineService {
         return machineRepository.getAll();
     }
 
-    public Optional<Machine> getMachine(int id) {
-        return machineRepository.getMachine(id);
+    public Optional<Machine>getById(int id){
+        return machineRepository.getById(id);
     }
 
-    public Machine save(Machine p) {
-        if (p.getId() == null) {
-            return machineRepository.save(p);
-        } else {
-            Optional<Machine> e = machineRepository.getMachine(p.getId());
-            if(e.isPresent()){
-                return p;
-            }else{
-                return machineRepository.save(p);
-            }
+    public Machine save(Machine c){
+        if(c.getId()==null){
+            return machineRepository.save(c);
         }
-
+        return c;
     }
-    public Machine update(Machine p) {
-        if (p.getId()!=null){
-            Optional<Machine> q= machineRepository.getMachine(p.getId());
-            if(q.isPresent()){
-                if(p.getName()!=null){
-                    q.get().setName(p.getName());
-                }
-                if(p.getBrand()!=null){
-                    q.get().setBrand(p.getBrand());
-                }
-                if(p.getYear()!=null){
-                    q.get().setYear(p.getYear());
-                }
-                if(p.getDescription()!=null){
-                    q.get().setDescription(p.getDescription());
-                }
-                if(p.getCategory()!=null){
-                    q.get().setCategory(p.getCategory());
-                }
-
-                machineRepository.save(q.get());
-                return q.get();
-            }else{
-                return p;
-            }
-        }else{
-            return p;
-        }
-    }
-
     public boolean delete(int id){
-        boolean flag=false;
-        Optional<Machine>p= machineRepository.getMachine(id);
-        if(p.isPresent()){
-            machineRepository.delete(p.get());
-            flag=true;
+        Optional<Machine> cOp= machineRepository.getById(id);
+        if(cOp.isPresent()){
+            machineRepository.delete(cOp.get());
+            return true;
         }
-        return flag;
+        return false;
     }
+    public Machine update(Machine c){
+        if(c.getId()!=null){
+            Optional<Machine> old= machineRepository.getById(c.getId());
+            if(old.isPresent()){
+                Machine k=old.get();
+                if(c.getName()!=null){
+                    k.setName(c.getName());
+                }
+                if(c.getId()!=null){
+                    k.setId(c.getId());
+                }
+                if(c.getName()!=null){
+                    k.setName(c.getName());
+                }
+                if(c.getBrand()!=null){
+                    k.setBrand(c.getBrand());
+                }
+                if(c.getYear()!=null){
+                    k.setYear(c.getYear());
+                }
+                if(c.getDescription()!=null){
+                    k.setDescription(c.getDescription());
+                }
+
+
+                return machineRepository.save(k);
+            }
+        }
+        return c;
+    }
+
 }

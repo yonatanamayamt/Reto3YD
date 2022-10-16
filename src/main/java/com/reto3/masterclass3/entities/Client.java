@@ -9,13 +9,13 @@ import java.util.List;
 @Entity
 @Table(name ="client")
 public class Client implements Serializable {
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idClient;
     private String email;
     private String password;
-   private String name;
-   private Integer age;
+    private String name;
+    private Integer age;
 
 
 

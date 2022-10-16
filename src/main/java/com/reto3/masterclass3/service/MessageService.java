@@ -18,52 +18,39 @@ public class MessageService {
         return messageRepository.getAll();
     }
 
-    public Optional<Message> getMessage(int id) {
-        return messageRepository.getMessage(id);
+    public Optional<Message>getById(int id){
+        return messageRepository.getById(id);
     }
 
-    public Message save(Message p) {
-        if (p.getIdMessage() == null) {
-            return messageRepository.save(p);
-        } else {
-            Optional<Message> e = messageRepository.getMessage(p.getIdMessage());
-            if(e.isPresent()){
-                return p;
-            }else{
-                return messageRepository.save(p);
-            }
+    public Message save(Message c){
+        if(c.getIdMessage()==null){
+            return messageRepository.save(c);
         }
-
+        return c;
     }
-    public Message update(Message p) {
-        if (p.getIdMessage()!=null){
-            Optional<Message> q= messageRepository.getMessage(p.getIdMessage());
-            if(q.isPresent()){
-                if(p.getMessageText()!=null){
-                    q.get().setMessageText(p.getMessageText());
-                }
-                if(p.getMachine()!=null){
-                    q.get().setMachine(p.getMachine());
-                }
-
-
-                messageRepository.save(q.get());
-                return q.get();
-            }else{
-                return p;
-            }
-        }else{
-            return p;
-        }
-    }
-
     public boolean delete(int id){
-        boolean flag=false;
-        Optional<Message>p= messageRepository.getMessage(id);
-        if(p.isPresent()){
-            messageRepository.delete(p.get());
-            flag=true;
+        Optional<Message> cOp= messageRepository.getById(id);
+        if(cOp.isPresent()){
+            messageRepository.delete(cOp.get());
+            return true;
         }
-        return flag;
+        return false;
+    }
+    public Message update(Message c){
+        if(c.getIdMessage()!=null){
+            Optional<Message> old= messageRepository.getById(c.getIdMessage());
+            if(old.isPresent()){
+                Message k=old.get();
+                if(c.getIdMessage()!=null){
+                    k.setIdMessage(c.getIdMessage());
+                }
+                if(c.getMessageText()!=null){
+                    k.setMessageText(c.getMessageText());
+                }
+
+                return messageRepository.save(k);
+            }
+        }
+        return c;
     }
 }

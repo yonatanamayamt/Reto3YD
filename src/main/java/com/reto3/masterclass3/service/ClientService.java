@@ -18,48 +18,46 @@ public class ClientService {
         return clientRepository.getAll();
     }
 
-    public Optional<Client> getClient(int id) {
-        return clientRepository.getClient(id);
+    public Optional<Client>getById(int id){
+        return clientRepository.getById(id);
     }
-
-    public Client save(Client p) {
-        if (p.getIdClient() == null) {
-            return clientRepository.save(p);
-        } else {
-            Optional<Client> e = clientRepository.getClient(p.getIdClient());
-            if(e.isPresent()){
-                return p;
-            }else{
-                return clientRepository.save(p);
-            }
+    public Client save(Client c){
+        if(c.getIdClient()==null){
+            return clientRepository.save(c);
         }
-
+        return c;
     }
-    public Client update(Client p) {
-        if (p.getIdClient()!=null){
-            Optional<Client> q= clientRepository.getClient(p.getIdClient());
-            if(q.isPresent()){
-                if(p.getName()!=null){
-                    q.get().setName(p.getName());
-                }
-
-                clientRepository.save(q.get());
-                return q.get();
-            }else{
-                return p;
-            }
-        }else{
-            return p;
-        }
-    }
-
     public boolean delete(int id){
-        boolean flag=false;
-        Optional<Client>p= clientRepository.getClient(id);
-        if(p.isPresent()){
-            clientRepository.delete(p.get());
-            flag=true;
+        Optional<Client> cOp=clientRepository.getById(id);
+        if(cOp.isPresent()){
+            clientRepository.delete(cOp.get());
+            return true;
         }
-        return flag;
+        return false;
+    }
+    public Client update(Client c){
+        if(c.getIdClient()!=null){
+            Optional<Client> old=clientRepository.getById(c.getIdClient());
+            if(old.isPresent()){
+                Client k=old.get();
+                if(c.getName()!=null){
+                    k.setName(c.getName());
+                }
+                if(c.getIdClient()!=null){
+                    k.setIdClient(c.getIdClient());
+                }
+                if(c.getEmail()!=null){
+                    k.setEmail(c.getEmail());
+                }
+                if(c.getPassword()!=null){
+                    k.setPassword(c.getPassword());
+                }
+                if(c.getAge()!=null){
+                    k.setAge(c.getAge());
+                }
+                return clientRepository.save(k);
+            }
+        }
+        return c;
     }
 }

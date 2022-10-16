@@ -17,16 +17,13 @@ public class ClientRepository {
     public List<Client> getAll(){
         return (List<Client>) clientCrudRepository.findAll();
     }
-    public Optional<Client> getClient(int id){
-return clientCrudRepository.findById(id);
+    public Optional<Client> getById(int id){
+        return clientCrudRepository.findById(id);
     }
-    public Client save(Client p){
-
-        return clientCrudRepository.save(p);
+    public Client save(Client c){
+        return clientCrudRepository.save(c);
     }
-
-    public void delete(Client p){
-
-        clientCrudRepository.delete(p);
+    public void delete(Client c){
+        clientCrudRepository.delete(c);
     }
 }
