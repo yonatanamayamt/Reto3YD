@@ -19,7 +19,7 @@ public class Reservation {
     private String status = "created";
 
     @ManyToOne
-    @JoinColumn(name="libId")
+    @JoinColumn(name="machineId")
     @JsonIgnoreProperties({"reservations","messages"})
     private Machine machine;
 
