@@ -13,18 +13,18 @@ import java.util.Optional;
 public class ScoreRepository {
 
     @Autowired
-    private ScoreCrudRepository clientCrudRepository;
+    private ScoreCrudRepository scoreCrudRepository;
 
-    public List<Score> getAll(){
-        return (List<Score>) clientCrudRepository.findAll();
+    public List<Score> getAll() { return (List<Score>) scoreCrudRepository.findAll(); }
+    public Optional<Score> getScore (int id) {
+        return scoreCrudRepository.findById(id);
     }
-    public Optional<Score> getById(int id){
-        return clientCrudRepository.findById(id);
+    public Score save (Score score) {
+        return scoreCrudRepository.save(score);
     }
-    public Score save(Score c){
-        return clientCrudRepository.save(c);
-    }
-    public void delete(Score c){
-        clientCrudRepository.delete(c);
+    public void delete (Score score) {
+        scoreCrudRepository.delete(score);
     }
 }
+
+

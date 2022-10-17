@@ -7,39 +7,48 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name ="score")
+@Table(name = "score")
 public class Score implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer IdScore;
-    private Integer score;
+    private Integer idScore;
+    private String messageText;
+    private Integer stars;
 
     @OneToOne
     @JsonIgnoreProperties("score")
-    private Reservation reservation;
-
+    private Reservation reservations;
 
     public Integer getIdScore() {
-        return IdScore;
+        return idScore;
     }
 
     public void setIdScore(Integer idScore) {
-        IdScore = idScore;
+        this.idScore = idScore;
     }
 
-    public Integer getScore() {
-        return score;
+    public String getMessageText() {
+        return messageText;
     }
 
-    public void setScore(Integer score) {
-        this.score = score;
+    public void setMessageText(String messageText) {
+        this.messageText = messageText;
     }
 
-    public Reservation getReservation() {
-        return reservation;
+    public Integer getStars() {
+        return stars;
     }
 
-    public void setReservation(Reservation reservation) {
-        this.reservation = reservation;
+    public void setStars(Integer stars) {
+        this.stars = stars;
+    }
+
+    public Reservation getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(Reservation reservations) {
+        this.reservations = reservations;
     }
 }

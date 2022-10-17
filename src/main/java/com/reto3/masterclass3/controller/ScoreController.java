@@ -14,31 +14,26 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/Score")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class ScoreController {
+
     @Autowired
     private ScoreService scoreService;
     @GetMapping("/all")
-    public List<Score> getAll(){
-        return scoreService.getAll();
-    }
+    public List<Score> getAll(){ return scoreService.getAll(); }
+
     @GetMapping("/{id}")
-    public Optional<Score> getById(@PathVariable("id") int id) {
-        return scoreService.getById(id);
-    }
+    public Optional<Score> getScore (@PathVariable("id") int id){ return scoreService.getScore(id); }
+
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Score save(@RequestBody Score p){
-        return scoreService.save(p);
-    }
+    public Score save (@RequestBody Score score){ return scoreService.save(score); }
 
-    @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public Score update(@RequestBody Score c){
-        return scoreService.update(c);
-    }
-    @DeleteMapping("/{id}")
+    @PutMapping("/update")
+    public Score update (@RequestBody Score score){ return scoreService.update(score); }
+
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public boolean delete(@PathVariable("id") int id){
-        return scoreService.delete(id);
-    }
+    @DeleteMapping("/{id}")
+    public boolean delete (@PathVariable("id") int carId){ return scoreService.delete(carId); }
 }

@@ -17,39 +17,48 @@ public class ScoreService {
     public List<Score> getAll() {
         return scoreRepository.getAll();
     }
+    public Optional<Score> getScore (int id) {
+        return scoreRepository.getScore(id);
+    }
 
-    public Optional<Score>getById(int id){
-        return scoreRepository.getById(id);
-    }
-    public Score save(Score c){
-        if(c.getIdScore()==null){
-            return scoreRepository.save(c);
-        }
-        return c;
-    }
-    public boolean delete(int id){
-        Optional<Score> cOp= scoreRepository.getById(id);
-        if(cOp.isPresent()){
-            scoreRepository.delete(cOp.get());
-            return true;
-        }
-        return false;
-    }
-    public Score update(Score c){
-        if(c.getIdScore()!=null){
-            Optional<Score> old= scoreRepository.getById(c.getIdScore());
-            if(old.isPresent()){
-                Score k=old.get();
-                if(c.getIdScore()!=null){
-                    k.setIdScore(c.getIdScore());
-                }
-                if(c.getScore()!=null){
-                    k.setScore(c.getScore());
-                }
-
-                return scoreRepository.save(k);
+    public Score save (Score score){
+        if (score.getIdScore()==null){
+            return scoreRepository.save(score);
+        } else {
+            Optional<Score> e = scoreRepository.getScore(score.getIdScore());
+            if (!e.isPresent()){
+                return scoreRepository.save(score);
+            } else {
+                return score;
             }
         }
-        return c;
+    }
+
+    public Score update (Score score){
+        if (score.getIdScore() != null){
+            Optional<Score> e = scoreRepository.getScore(score.getIdScore());
+            if (!e.isPresent()){
+                if (score.getMessageText() != null){
+                    e.get().setMessageText(score.getMessageText());
+                }
+                if (score.getStars() != null){
+                    e.get().setStars(score.getStars());
+                }
+                scoreRepository.save(e.get());
+                return e.get();
+            } else {
+                return score;
+            }
+        } else {
+            return score;
+        }
+    }
+
+    public boolean delete (int id){
+        Boolean r = getScore(id).map(score -> {
+            scoreRepository.delete(score);
+            return true;
+        }).orElse(false);
+        return r;
     }
 }

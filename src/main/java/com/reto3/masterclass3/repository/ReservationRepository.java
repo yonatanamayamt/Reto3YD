@@ -16,28 +16,14 @@ public class ReservationRepository {
     @Autowired
     private ReservationCrudRepository reservationCrudRepository;
 
-    public List<Reservation> getAll(){
-        return (List<Reservation>) reservationCrudRepository.findAll();
-    }
-    public Optional<Reservation> getById(int id){
+    public List<Reservation> getAll() { return (List<Reservation>) reservationCrudRepository.findAll(); }
+    public Optional<Reservation> getReservation (int id) {
         return reservationCrudRepository.findById(id);
     }
-    public Reservation save(Reservation c){
-        return reservationCrudRepository.save(c);
+    public Reservation save (Reservation reservation) {
+        return reservationCrudRepository.save(reservation);
     }
-    public void delete(Reservation c){
-        reservationCrudRepository.delete(c);
+    public void delete (Reservation reservation) {
+        reservationCrudRepository.delete(reservation);
     }
-
-    public List<Reservation> getDatesReport(Date inicio,Date fin){
-        return reservationCrudRepository.findAllByStartDateAfterAndStartDateBefore(inicio,fin);
-    }
-    public List<Reservation> getStatusReport(String sts){
-        return reservationCrudRepository.findAllByStatus(sts);
-    }
-
-    public List<Object[]> getTopClients(){
-        return reservationCrudRepository.getTopClients();
-    }
-
 }

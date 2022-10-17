@@ -7,23 +7,23 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name ="message")
+@Table(name = "message")
 public class Message implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idMessage;
     private String messageText;
 
     @ManyToOne
-    @JoinColumn(name="machineId")
+    @JoinColumn(name = "machineId")
     @JsonIgnoreProperties({"messages", "reservations"})
     private Machine machine;
 
     @ManyToOne
-    @JoinColumn(name="clientId")
+    @JoinColumn(name = "clientId")
     @JsonIgnoreProperties({"messages", "reservations"})
     private Client client;
-
 
     public Integer getIdMessage() {
         return idMessage;

@@ -7,30 +7,28 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name="reservation")
-public class Reservation {
+@Table(name = "reservation")
+public class Reservation implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idReservation;
-
     private Date startDate;
     private Date devolutionDate;
-    private String status = "created";
+    private String status="created";
 
     @ManyToOne
-    @JoinColumn(name="machineId")
-    @JsonIgnoreProperties({"reservations","messages"})
+    @JoinColumn(name = "machineId")
+    @JsonIgnoreProperties("reservations")
     private Machine machine;
 
     @ManyToOne
-    @JoinColumn(name="clientId")
-    @JsonIgnoreProperties({"reservations","messages"})
+    @JoinColumn(name = "clientId")
+    @JsonIgnoreProperties({"reservations", "messages"})
     private Client client;
 
-
-    @OneToOne(cascade = CascadeType.REMOVE, mappedBy = "reservation")
-    @JsonIgnoreProperties("reservation")
+    @OneToOne
+    @JsonIgnoreProperties("reservations")
     private Score score;
 
     public Integer getIdReservation() {
@@ -89,3 +87,5 @@ public class Reservation {
         this.score = score;
     }
 }
+
+
