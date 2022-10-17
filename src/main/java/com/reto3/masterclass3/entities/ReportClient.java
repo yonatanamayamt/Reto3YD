@@ -10,15 +10,15 @@ public class ReportClient implements Serializable {
         return total;
     }
 
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
     public Client getClient() {
         return client;
     }
 
     public void setClient(Client client) {
         this.client = client;
-    }
-
-    public void setTotal(int total) {
-        this.total = total;
     }
 }
